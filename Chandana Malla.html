@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chandana Malla</title>
+<meta name="description" content="Chandana Malla — Business Technology student at UMBC working in analytics, automation and cybersecurity.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07050C;
+    --surface: #0E0918;
+    --surface-alt: #0B0714;
+    --border: #2A1B42;
+    --border-soft: #1A1129;
+    --text: #EDE7F6;
+    --text-soft: #CFC4E0;
+    --muted: #A99BC0;
+    --neon: #B26BFF;
+    --neon-light: #D8B4FE;
+    --glow: rgba(168, 85, 247, 0.45);
+    --label: "Inter", system-ui, sans-serif;
+    --display: "Sora", sans-serif;
+    --body: "Inter", system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body {
+    margin: 0;
+    font-family: var(--body);
+    color: var(--text);
+    background-color: var(--bg);
+    background-image: radial-gradient(#1D1330 1px, transparent 1px);
+    background-size: 24px 24px;
+    overflow-x: hidden;
+  }
+  a { color: var(--neon-light); }
+  a:hover { color: #FFFFFF; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--neon); outline-offset: 3px; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .section { padding: 120px 0; border-top: 1px solid var(--border-soft); }
+  .label { margin: 0; font-family: var(--label); font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--neon); }
+  .glow { color: var(--neon); text-shadow: 0 0 14px var(--glow); }
+  .heading {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    color: #FFFFFF;
+  }
+  .split { display: flex; flex-wrap: wrap; gap: 48px; }
+  .split > .label { flex: 1 1 200px; }
+  .split > .split-body { flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 28px; }
+
+  /* Navigation */
+  .nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(7, 5, 12, 0.82);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #22163A;
+  }
+  .nav-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; padding-bottom: 12px; }
+  .logo { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; font-family: var(--display); font-weight: 600; font-size: 16px; letter-spacing: 0.02em; color: #FFFFFF; text-decoration: none; }
+  .logo svg { filter: drop-shadow(0 0 6px var(--neon)); }
+  .nav-links { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+  .nav-links a { padding: 12px; font-size: 14px; color: var(--muted); text-decoration: none; }
+  .nav-links a:hover, .nav-links a.active { color: #FFFFFF; }
+  .nav-links .nav-cta {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; margin-left: 8px;
+    border: 1px solid var(--neon); border-radius: 6px; color: #FFFFFF; font-weight: 600;
+    box-shadow: 0 0 16px rgba(168, 85, 247, 0.35), inset 0 0 12px rgba(168, 85, 247, 0.2);
+  }
+
+  /* Hero */
+  .hero { position: relative; overflow: hidden; }
+  .hero-beams, .sparkle-field { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .hero-inner { position: relative; padding-top: 120px; padding-bottom: 96px; display: flex; flex-direction: column; gap: 36px; }
+  .hero-eyebrow { margin: 0; font-family: var(--label); font-size: 13px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; line-height: 1.9; color: var(--neon); text-shadow: 0 0 10px var(--neon); }
+  .hero-name { margin: 0; font-family: var(--display); font-weight: 300; font-size: clamp(3rem, 10vw, 8.75rem); line-height: 0.95; letter-spacing: -0.04em; color: #FFFFFF; }
+  .hero-name span { font-weight: 700; color: var(--neon); text-shadow: 0 0 18px var(--neon), 0 0 48px rgba(168, 85, 247, 0.5); }
+  .hero-bottom { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; }
+  .hero-tagline { margin: 0; font-family: var(--display); font-size: clamp(1.35rem, 2.4vw, 1.9rem); line-height: 1.3; max-width: 30ch; }
+  .scroll-cue { padding: 12px 0; font-family: var(--label); font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+  .cursor { display: inline-block; color: var(--neon); animation: bob 1.6s ease-in-out infinite; }
+
+  .beam { stroke-dasharray: 260 1540; animation: flow 6s linear infinite; }
+
+  /* Skills marquee */
+  .marquee {
+    overflow: hidden; white-space: nowrap; padding: 16px 0; background: var(--surface-alt);
+    border-top: 1px solid var(--neon); border-bottom: 1px solid var(--neon);
+    box-shadow: 0 0 24px rgba(168, 85, 247, 0.35);
+  }
+  .marquee-track { display: inline-flex; gap: 48px; padding-right: 48px; font-family: var(--display); font-weight: 300; font-size: 22px; letter-spacing: 0.02em; color: var(--neon); text-shadow: 0 0 10px var(--neon); animation: marquee 38s linear infinite; }
+
+  /* About */
+  #about { border-top: none; }
+  .about-text { margin: 0; font-size: 18px; line-height: 1.7; color: #BFB3D4; max-width: 60ch; }
+  .latest {
+    align-self: flex-start; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;
+    min-width: min(100%, 440px); padding: 22px 28px; border-radius: 8px;
+    background: var(--surface); border: 1px solid var(--border); color: #FFFFFF; text-decoration: none;
+  }
+  .latest-label { display: block; margin-bottom: 6px; font-family: var(--label); font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--neon); }
+  .latest-title { font-size: 17px; font-weight: 600; }
+
+  /* Cards */
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  }
+  .card:hover { border-color: #7C3AED; box-shadow: 0 0 0 1px #7C3AED, 0 0 28px rgba(168, 85, 247, 0.25); transform: translateY(-2px); }
+  .work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 20px; margin-top: 56px; }
+  .work-card { padding: 32px; display: flex; flex-direction: column; gap: 16px; }
+  .work-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .work-number { font-family: var(--display); font-weight: 300; font-size: 32px; color: var(--neon); text-shadow: 0 0 10px var(--neon); }
+  .tag { font-family: var(--label); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 12px; border: 1px solid #3B2760; border-radius: 999px; color: var(--neon-light); }
+  .work-card h3 { margin: 0; font-family: var(--display); font-size: 22px; font-weight: 600; line-height: 1.2; color: #FFFFFF; }
+  .work-meta { margin: 0; font-size: 14px; color: var(--muted); }
+  .work-card ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 1.55; color: var(--text-soft); }
+
+  /* Tools */
+  .tool-list { display: flex; flex-wrap: wrap; gap: 10px; margin: 44px 0 0; padding: 0; list-style: none; }
+  .tool-list li { font-size: 15px; padding: 11px 18px; border-radius: 6px; }
+
+  /* Leadership */
+  .role-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 22px 0; border-bottom: 1px solid #22163A; }
+  .role-name { font-size: 18px; font-weight: 500; color: #FFFFFF; }
+  .role-date { font-family: var(--label); font-size: 14px; color: var(--muted); }
+
+  /* Contact */
+  .contact { position: relative; overflow: hidden; background: var(--surface-alt); border-top: 1px solid var(--neon); box-shadow: 0 -12px 40px rgba(168, 85, 247, 0.18); }
+  .contact-inner { position: relative; padding-top: 128px; padding-bottom: 48px; display: flex; flex-direction: column; gap: 32px; }
+  .contact-heading { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(2.5rem, 7vw, 5.5rem); line-height: 0.98; letter-spacing: -0.03em; color: #FFFFFF; }
+  .contact-heading span { color: var(--neon); text-shadow: 0 0 20px var(--neon), 0 0 60px rgba(168, 85, 247, 0.45); }
+  .buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+  .button {
+    display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; border-radius: 6px;
+    font-family: var(--body); font-weight: 600; font-size: 16px; text-decoration: none; cursor: pointer;
+    border: 1px solid #3B2760; background: transparent; color: #FFFFFF;
+  }
+  .button-primary { background: var(--neon); border-color: var(--neon); color: var(--bg); box-shadow: 0 0 24px rgba(168, 85, 247, 0.55); }
+  .button-primary:hover { color: var(--bg); box-shadow: 0 0 36px rgba(168, 85, 247, 0.8); }
+  .email-line { margin: 0; font-family: var(--label); font-size: 15px; letter-spacing: 0.02em; color: var(--muted); }
+  .footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 24px; padding-top: 72px; border-top: 1px solid #22163A; font-family: var(--label); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+
+  /* Sparkles and mouse trail */
+  .sparkle { position: absolute; filter: drop-shadow(0 0 4px currentColor); animation: twinkle 2.8s ease-in-out infinite; }
+  .trail-dot { position: fixed; z-index: 30; pointer-events: none; animation: fade-fall 1s ease-out forwards; }
+
+  /* Fade-in on scroll */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @keyframes flow { to { stroke-dashoffset: -1800; } }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  @keyframes bob { 50% { transform: translateY(5px); } }
+  @keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(0.3); } 50% { opacity: 1; transform: scale(1); } }
+  @keyframes fade-fall { from { opacity: 1; transform: translate(0, 0) scale(1); } to { opacity: 0; transform: translate(0, 18px) scale(0.2); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .beam, .marquee-track, .cursor, .sparkle { animation: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <nav class="container nav-inner" aria-label="Main">
+    <a class="logo" href="#top">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="M12 0C13 8 16 11 24 12C16 13 13 16 12 24C11 16 8 13 0 12C8 11 11 8 12 0Z" fill="#B26BFF"/></svg>
+      Chandana Malla
+    </a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#tools">Tools</a>
+      <a class="nav-cta" href="#contact">Let’s talk</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="top">
+    <svg class="hero-beams" aria-hidden="true" viewBox="0 0 1440 760" preserveAspectRatio="none" id="beams"></svg>
+    <div class="sparkle-field" aria-hidden="true" data-sparkles="14"></div>
+    <div class="container hero-inner">
+      <p class="hero-eyebrow">Analytics · Automation<br>Cybersecurity</p>
+      <h1 class="hero-name">CHANDANA<br><span>MALLA</span></h1>
+      <div class="hero-bottom">
+        <p class="hero-tagline">Turning messy data and systems into <span class="glow">something teams can trust.</span></p>
+        <a class="scroll-cue" href="#about">Scroll to explore <span class="cursor">↓</span></a>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marquee"></div>
+  </div>
+
+  <section class="section" id="about">
+    <div class="container split reveal">
+      <p class="label">// About</p>
+      <div class="split-body">
+        <h2 class="heading" style="font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.12">I’m a Business Technology student at UMBC. <span class="glow">I like the part where the dashboard finally makes sense.</span></h2>
+        <p class="about-text">Graduating Spring 2028. I’ve built KPI tooling for SSD failure analysis at Solidigm, hardened servers as a CyberPatriot competitor, and spent three years teaching math. I care about clean data, clear documentation and systems that stay maintainable.</p>
+        <a class="latest card" href="#work">
+          <span><span class="latest-label">Latest</span><span class="latest-title">Engineering Analytics Intern at Solidigm</span></span>
+          <span class="glow" style="font-size: 22px">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="container">
+      <div class="reveal">
+        <p class="label">// Work</p>
+        <h2 class="heading" style="margin-top: 14px">Selected <span class="glow">work</span></h2>
+      </div>
+      <div class="work-grid">
+        <article class="card work-card reveal">
+          <div class="work-top"><span class="work-number">01</span><span class="tag">Internship</span></div>
+          <h3>Engineering Analytics &amp; Dashboard Development</h3>
+          <p class="work-meta">Solidigm · Rancho Cordova, CA · Mar – Aug 2026</p>
+          <ul>
+            <li>Refactored and debugged Python scripts for SSD failure analysis and issue-resolution KPIs.</li>
+            <li>Pulled data from JIRA and Microsoft Dynamics for KPI reporting.</li>
+            <li>Documented workflows for long-term maintainability.</li>
+          </ul>
+        </article>
+        <article class="card work-card reveal">
+          <div class="work-top"><span class="work-number">02</span><span class="tag">Security</span></div>
+          <h3>Exploiting Back Doors</h3>
+          <p class="work-meta">Kali Linux · Metasploit · Aug 2024</p>
+          <ul>
+            <li>Exploited a Metasploitable backdoor to gain access through port 22.</li>
+            <li>Patched the vulnerability by updating Metasploit.</li>
+            <li>Researched the exploitation techniques behind it.</li>
+          </ul>
+        </article>
+        <article class="card work-card reveal">
+          <div class="work-top"><span class="work-number">03</span><span class="tag">Capstone</span></div>
+          <h3>CTO, IoT Network Design</h3>
+          <p class="work-meta">ARL · Ellicott City, MD · Mar 2022</p>
+          <ul>
+            <li>Led a student team designing an IoT network architecture (IPv4/IPv6, encryption).</li>
+            <li>Secured it with firewall protocols and WPA3, reaching 92% task accuracy.</li>
+          </ul>
+        </article>
+        <article class="card work-card reveal">
+          <div class="work-top"><span class="work-number">04</span><span class="tag">Competition</span></div>
+          <h3>CyberPatriot</h3>
+          <p class="work-meta">ARL · Ellicott City, MD · 2022 – 2023</p>
+          <ul>
+            <li>Hardened Windows Server, Linux Server, Windows and Linux systems.</li>
+            <li>Applied network forensics, cryptography and Packet Tracer simulations.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tools">
+    <div class="container reveal">
+      <p class="label">// Tools</p>
+      <h2 class="heading" style="margin-top: 14px">Things I build <span class="glow">with</span></h2>
+      <ul class="tool-list" id="tools-list"></ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split reveal">
+      <p class="label">// Beyond class</p>
+      <div class="split-body" style="gap: 0">
+        <div class="role-row"><span class="role-name">PR Chair, South Asian Student Association</span><span class="role-date">Aug 2026 – now</span></div>
+        <div class="role-row"><span class="role-name">PR Chair, Hindu Student Council</span><span class="role-date">2025 – 2026</span></div>
+        <div class="role-row"><span class="role-name">Lead Instructor, Mathnasium — Salesforce reports, trained new hires</span><span class="role-date">2023 – 2026</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="sparkle-field" aria-hidden="true" data-sparkles="8"></div>
+    <div class="container contact-inner">
+      <p class="label">// Contact</p>
+      <h2 class="contact-heading">Let’s make <span>something good.</span></h2>
+      <p class="about-text">Open to internships in analytics, business operations and security.</p>
+      <div class="buttons">
+        <a class="button button-primary" href="mailto:cmalla2@umbc.edu">Get in touch</a>
+        <button class="button" type="button" id="copy-email">Copy email</button>
+        <a class="button" href="https://linkedin.com/in/chandana-malla/">LinkedIn</a>
+        <a class="button" href="https://github.com/cmalla2">GitHub</a>
+      </div>
+      <p class="email-line">cmalla2@umbc.edu</p>
+      <footer class="footer"><span>Chandana Malla</span><span>© 2026 · UMBC</span></footer>
+    </div>
+  </section>
+</main>
+
+<script>
+  const NEON = "#B26BFF";
+  const SPARKLE_COLORS = [NEON, "#FFFFFF", "#D8B4FE"];
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Scrolling skills strip
+  const marqueeWords = ["Python", "SQL", "KPI dashboards", "Network security", "JIRA", "Data analysis", "Linux", "Documentation"];
+  const marquee = document.getElementById("marquee");
+  marqueeWords.concat(marqueeWords).forEach((word) => {
+    const item = document.createElement("span");
+    item.textContent = word + " ✦";
+    marquee.appendChild(item);
+  });
+
+  // Tools list
+  const tools = ["Python", "JavaScript", "Java", "SQL", "R", "C/C++", "HTML", "Bash", "MATLAB", "JSON", "VS Code", "PyCharm", "Jupyter", "JIRA", "Salesforce", "Microsoft Dynamics", "Wireshark", "Packet Tracer", "VirtualBox", "VMware"];
+  const toolsList = document.getElementById("tools-list");
+  tools.forEach((tool) => {
+    const item = document.createElement("li");
+    item.className = "card";
+    item.textContent = tool;
+    toolsList.appendChild(item);
+  });
+
+  // Neon light beams in the hero
+  const beamCurves = [
+    ["M-60 560 C 260 420, 560 660, 880 470 S 1320 300, 1520 380", "#7C3AED", 0],
+    ["M-60 600 C 300 500, 620 700, 940 520 S 1340 380, 1520 450", NEON, -1.4],
+    ["M-60 640 C 340 560, 680 720, 1000 580 S 1360 460, 1520 520", "#E879F9", -3.1],
+    ["M-60 520 C 220 360, 520 600, 820 420 S 1280 240, 1520 300", "#A78BFA", -4.4],
+    ["M-60 680 C 380 620, 720 740, 1060 640 S 1380 540, 1520 590", NEON, -2.2]
+  ];
+  const beams = document.getElementById("beams");
+  const svgNs = "http://www.w3.org/2000/svg";
+  const glowLayer = document.createElementNS(svgNs, "g");
+  glowLayer.setAttribute("style", "filter: blur(5px); opacity: 0.9");
+  const coreLayer = document.createElementNS(svgNs, "g");
+  coreLayer.setAttribute("opacity", "0.85");
+  beamCurves.forEach(([shape, color, delay]) => {
+    const makePath = (stroke, width, animated) => {
+      const path = document.createElementNS(svgNs, "path");
+      path.setAttribute("d", shape);
+      path.setAttribute("fill", "none");
+      path.setAttribute("stroke", stroke);
+      path.setAttribute("stroke-width", width);
+      path.setAttribute("stroke-linecap", "round");
+      if (animated) {
+        path.setAttribute("class", "beam");
+        path.style.animationDelay = delay + "s";
+      } else {
+        path.setAttribute("stroke-opacity", "0.35");
+      }
+      return path;
+    };
+    beams.appendChild(makePath(color, 1.2, false));
+    glowLayer.appendChild(makePath(color, 7, true));
+    coreLayer.appendChild(makePath("#FFFFFF", 1.6, true));
+  });
+  beams.appendChild(glowLayer);
+  beams.appendChild(coreLayer);
+
+  // Twinkling pixel sparkles
+  document.querySelectorAll("[data-sparkles]").forEach((field) => {
+    const count = Number(field.dataset.sparkles);
+    for (let i = 0; i < count; i++) {
+      const size = 8 + Math.round(Math.random() * 12);
+      const color = SPARKLE_COLORS[i % SPARKLE_COLORS.length];
+      const sparkle = document.createElementNS(svgNs, "svg");
+      sparkle.setAttribute("viewBox", "0 0 24 24");
+      sparkle.setAttribute("class", "sparkle");
+      sparkle.style.left = (4 + Math.random() * 92) + "%";
+      sparkle.style.top = (6 + Math.random() * 86) + "%";
+      sparkle.style.width = size + "px";
+      sparkle.style.animationDelay = (Math.random() * 2.4).toFixed(2) + "s";
+      sparkle.innerHTML = '<path d="M12 0C13 8 16 11 24 12C16 13 13 16 12 24C11 16 8 13 0 12C8 11 11 8 12 0Z" fill="' + color + '"/>';
+      field.appendChild(sparkle);
+    }
+  });
+
+  // Glitter trail that follows the mouse and fades after about a second
+  if (!reduceMotion) {
+    const trailColors = [NEON, "#FFFFFF", "#E9D5FF", "#C4B5FD", NEON];
+    let lastSpawn = 0;
+    let lastX = -100;
+    let lastY = -100;
+    document.addEventListener("pointermove", (event) => {
+      const now = performance.now();
+      const moveX = event.clientX - lastX;
+      const moveY = event.clientY - lastY;
+      if (now - lastSpawn < 30 || moveX * moveX + moveY * moveY < 16) return;
+      lastSpawn = now;
+      lastX = event.clientX;
+      lastY = event.clientY;
+      for (let i = 0; i < 3; i++) {
+        const size = 2 + Math.random() * 3;
+        const color = trailColors[Math.floor(Math.random() * trailColors.length)];
+        const dot = document.createElement("span");
+        dot.className = "trail-dot";
+        dot.style.left = (event.clientX + (Math.random() - 0.5) * 16) + "px";
+        dot.style.top = (event.clientY + (Math.random() - 0.5) * 16) + "px";
+        dot.style.width = size + "px";
+        dot.style.height = size + "px";
+        dot.style.borderRadius = "50%";
+        dot.style.background = color;
+        dot.style.boxShadow = "0 0 6px " + color;
+        dot.addEventListener("animationend", () => dot.remove());
+        document.body.appendChild(dot);
+      }
+    }, { passive: true });
+  }
+
+  // Fade sections in as they scroll into view
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+
+  // Highlight the nav link for the section on screen
+  const navLinks = document.querySelectorAll(".nav-links a[href^='#']");
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      navLinks.forEach((link) => link.classList.toggle("active", link.getAttribute("href") === "#" + entry.target.id));
+    });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  document.querySelectorAll("section[id]").forEach((section) => sectionObserver.observe(section));
+
+  // Copy email button
+  const copyButton = document.getElementById("copy-email");
+  copyButton.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText("cmalla2@umbc.edu");
+      copyButton.textContent = "Copied!";
+    } catch (error) {
+      copyButton.textContent = "cmalla2@umbc.edu";
+    }
+    setTimeout(() => { copyButton.textContent = "Copy email"; }, 2000);
+  });
+</script>
+</body>
+</html>
